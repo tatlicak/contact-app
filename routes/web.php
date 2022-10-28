@@ -17,10 +17,29 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/contact', function () {
+/* Route Examples */
+Route::get('/contacts', function () {
     return "<h1>All Contacts</h1>";
 });
 
-Route::get('/contact/create', function () {
+Route::get('/contacts/create', function () {
     return "<h1>Add Contact</h1>";
+});
+
+/* Route Parameters */
+
+Route::get('contacts/{id}', function ($id) {
+    return "Contact ID: ".$id;
+});
+
+Route::get('companies/{name?}', function ($name=null) {
+
+    if ($name){
+            
+        return "Company: ".$name;
+
+    }else{
+
+        return "All Companies";
+    }
 });
