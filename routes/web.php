@@ -30,7 +30,8 @@ Route::get('/contacts/create', function () {
 
 Route::get('contacts/{id}', function ($id) {
     return "Contact ID: ".$id;
-});
+})->whereNumber("id");
+//->where('id','[0-9]+'); //for Numeric 
 
 Route::get('companies/{name?}', function ($name=null) {
 
@@ -42,4 +43,6 @@ Route::get('companies/{name?}', function ($name=null) {
 
         return "All Companies";
     }
-});
+})->whereAlphaNumeric("name");
+//->whereAlpha("name");//for Alpha
+//->where('name','[a-zA-Z]+'); //for Alpha
