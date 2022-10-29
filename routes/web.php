@@ -25,9 +25,10 @@ Route::get('/', function () {
     </div>
     ";
     return $html;
-});
+})->name('homePage');
 
-/* Route Examples */
+Route::prefix('admin')->group(function(){
+    /* Route Examples */
 Route::get('/contacts', function () {
     return "<h1>All Contacts</h1>";
 })->name('contact.index');
@@ -56,3 +57,10 @@ Route::get('companies/{name?}', function ($name=null) {
 })->whereAlphaNumeric("name")->name('contact.name');
 //->whereAlpha("name");//for Alpha
 //->where('name','[a-zA-Z]+'); //for Alpha
+
+});
+
+Route::fallback(function(){
+
+    return "<h1>Sorry! Page Not Found... Return <a href=".route('homePage').">Home Page</a></h1>";
+});
