@@ -12,11 +12,12 @@
 
   <body>
     <h1>
-        Contact App
+        All Contact
         </h1>
         <div>
-            <a  href='{{route('contact.index')}}'>All Contact </a>
             
+            <a  href='{{route('contact.create')}}'>Add Contact</a>
+            <a  href='{{route('contact.show',1523)}}'>Show Contact</a>
         </div>
     <script src="js/scripts.js"></script>
   </body>

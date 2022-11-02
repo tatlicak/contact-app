@@ -14,23 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $html="
-    <h1>
-    Contact App
-    </h1>
-    <div>
-        <a  href=".route('contact.index').">All Contact </a>
-        <a  href=".route('contact.create').">Add Contact</a>
-        <a  href=".route('contact.show',1523).">Show Contact</a>
-    </div>
-    ";
-    return $html;
+    
+    return view('welcome');
 })->name('homePage');
 
 Route::prefix('admin')->group(function(){
     /* Route Examples */
 Route::get('/contacts', function () {
-    return "<h1>All Contacts</h1>";
+    return view('contacts.index');
 })->name('contact.index');
 
 Route::get('/contacts/create', function () {
