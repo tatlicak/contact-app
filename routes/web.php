@@ -20,12 +20,22 @@ Route::get('/', function () {
 
 Route::prefix('admin')->group(function(){
     /* Route Examples */
+
 Route::get('/contacts', function () {
-    return view('contacts.index');
+
+    $contacts=[
+                1=>['name'=>'Name-1', 'phone'=>"555-555-5555"],
+                2=>['name'=>'Name-2', 'phone'=>"666-666-6666"],
+                3=>['name'=>'Name-3', 'phone'=>"777-777-7777"],
+                4=>['name'=>'Name-4', 'phone'=>"888-888-8888"]
+            ];
+
+    return view('contacts.index',['contacts'=>$contacts]);
 })->name('contact.index');
 
+
 Route::get('/contacts/create', function () {
-    return "<h1>Add Contact</h1>";
+    return view('contacts.create');
 })->name('contact.create');
 
 /* Route Parameters */

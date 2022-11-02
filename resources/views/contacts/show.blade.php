@@ -12,20 +12,12 @@
 
   <body>
     <h1>
-        All Contact
+        Show Contact
         </h1>
         <div>
             
-            <a  href='{{route('contact.create')}}'>Add Contact</a>
-
-
-            <?php foreach ($contacts as $id => $contact):?>
-
-            <p>{{$contact['name']}} | {{$contact['phone']}} | <a  href='{{route('contact.show',$id)}}'>Show </a></p>
-            <?php endforeach ?>
-
-
-            <a  href='{{route('contact.show',1523)}}'>Show Contact</a>
+            <a  href='{{route('contact.index')}}'>Home Page</a>
+            <a  href='{{route('contact.create',1523)}}'>Add Contact</a>
         </div>
     <script src="js/scripts.js"></script>
   </body>
