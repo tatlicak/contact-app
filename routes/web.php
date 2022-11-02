@@ -30,7 +30,7 @@ Route::get('/contacts', function () {
                 4=>['name'=>'Name-4', 'phone'=>"888-888-8888"]
             ];
 
-    return view('contacts.index',['contacts'=>$contacts]);
+    return view('contacts.index',compact('contacts'));
 })->name('contact.index');
 
 
