@@ -12,13 +12,17 @@
 
   <body>
     <h1>
-        Show Contact
+        Contact Details
         </h1>
         <div>
             
-            <a  href='{{route('contact.index')}}'>Home Page</a>
-            <a  href='{{route('contact.create',1523)}}'>Add Contact</a>
+            <p>{{$contact['name']}}</p>
+            <p>{{$contact['phone']}}</p>
         </div>
+        <div>
+            
+          <a  href='{{route('contact.index')}}'>Back to All Contacts</a>
+      </div>
     <script src="js/scripts.js"></script>
   </body>
 </html>
