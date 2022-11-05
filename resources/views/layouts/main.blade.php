@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>My Contact</title>
+    <title>@yield('title','Contact App')</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Varela+Round">
     <!-- Bootstrap -->
@@ -47,6 +47,7 @@
       </div>
     </nav>
     {{--content--}}
+    @yield('content')
 
     <script src={{asset('js/jquery.min.js')}}></script>
     <script src={{asset('js/popper.min.js')}}></script>
