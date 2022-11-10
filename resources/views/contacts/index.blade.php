@@ -32,7 +32,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                      <?php foreach ($contacts as $id => $contact):?>
+                @if(count($contacts))
+                   @foreach ($contacts as $id => $contact)
                   <tr>
                     <th scope="row">1</th>
                     <td>{{$contact['name']}}</td>
@@ -45,7 +46,11 @@
                       <a href="#" class="btn btn-sm btn-circle btn-outline-danger" title="Delete" onclick="confirm('Are you sure?')"><i class="fa fa-times"></i></a>
                     </td>
                   </tr>
-                      <?php endforeach ?>
+                      @endforeach
+                  @else:
+                  <p> No Contact Found </p>
+                   @endif
+
                 </tbody>
               </table> 
 
