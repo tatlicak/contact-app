@@ -34,9 +34,30 @@
                                 </thead>
                                 <tbody>
 
+
+
                                     @forelse($contacts as $id => $contact)
-                                        <tr>
-                                            <th scope="row">1</th>
+                                   
+                                   {{-- @continue($id == 1)
+
+                                    @break($id == 3)--}}
+
+                                    {{--other way of continue--  }}
+
+                                   {{-- @if ($id == 1)
+                                            @continue
+                                        @endif --}}
+
+                                {{--other way of break--}}
+                                       {{-- @if ($id == 3)
+                                            @break
+                                        @endif --}}
+                                        
+                                        <tr @if($loop->odd) class="table-primary" @endif>
+                                        {{--<tr @if($loop->even) class="table-primary" @endif>
+                                        <tr @if($loop->last) class="table-primary" @endif>
+                                        <tr @if($loop->first) class="table-primary" @endif>--}}
+                                            <th scope="row">{{$loop->index}}</th>
                                             <td>{{ $contact['name'] }}</td>
                                             <td>{{ $contact['phone'] }}</td>
                                             <td>alfred@test.com</td>
