@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,17 +21,20 @@ Route::get('/', function () {
     return view('welcome');
 })->name('homePage');
 
-Route::prefix('admin')->group(function(){
-    /* Route Examples */
+Route::controller(ContactController::class)->name('contacts.')->group(function(){
 
-Route::get('/contacts', [ContactController::class,'index'])->name('contact.index');
+/* Route Examples */
+
+Route::get('/contacts', 'index')->name('index');
 
 
-Route::get('/contacts/create', [ContactController::class,'create'] )->name('contact.create');
+Route::get('/contacts/create','create')->name('create');
 
 /* Route Parameters */
 
-Route::get('contacts/{id}',[ContactController::class,'show'])->whereNumber("id")->name('contact.show');
+Route::get('contacts/{id}','show')->whereNumber("id")->name('show');
+});
+    
 //->where('id','[0-9]+'); //for Numeric 
 
 Route::get('companies/{name?}', function ($name=null) {
@@ -47,7 +51,7 @@ Route::get('companies/{name?}', function ($name=null) {
 //->whereAlpha("name");//for Alpha
 //->where('name','[a-zA-Z]+'); //for Alpha
 
-});
+
 
 Route::fallback(function(){
 
