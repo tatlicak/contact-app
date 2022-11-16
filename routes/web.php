@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,11 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::get('/', function () {
-    
-    return view('welcome');
-})->name('homePage');
+//__invoke() is used in controller
+Route::get('/', WelcomeController::class)->name('homePage');
 
 Route::controller(ContactController::class)->name('contacts.')->group(function(){
 
