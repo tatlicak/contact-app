@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,16 +13,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-function getContacts(){
 
-    return [
-        1=>['name'=>'Name-1', 'phone'=>"555-555-5555"],
-        2=>['name'=>'Name-2', 'phone'=>"666-666-6666"],
-        3=>['name'=>'Name-3', 'phone'=>"777-777-7777"],
-        4=>['name'=>'Name-4', 'phone'=>"888-888-8888"]
-    ];
-
-}
 
 Route::get('/', function () {
     
@@ -31,37 +23,14 @@ Route::get('/', function () {
 Route::prefix('admin')->group(function(){
     /* Route Examples */
 
-Route::get('/contacts', function () {
-
-    $companies = [
-        1 => ['name' => 'Company One', 'contacts' => 3],
-        2 => ['name' => 'Company Two', 'contacts' => 5],
-    ];
-
-    $contacts=getContacts();
-
-    return view('contacts.index',compact('contacts','companies'));
-})->name('contact.index');
+Route::get('/contacts', [ContactController::class,'index'])->name('contact.index');
 
 
-Route::get('/contacts/create', function () {
-    return view('contacts.create');
-})->name('contact.create');
+Route::get('/contacts/create', [ContactController::class,'create'] )->name('contact.create');
 
 /* Route Parameters */
 
-Route::get('contacts/{id}', function ($id) {
-
-    $contacts=getContacts();
-
-        abort_if(!isset($contacts[$id]),404);
-        //abort_unless(!isset($contacts[$id]),404);
-
-    $contact=$contacts[$id];
-
-    return view('contacts.show')->with('contact',$contact);
-
-})->whereNumber("id")->name('contact.show');
+Route::get('contacts/{id}',[ContactController::class,'show'])->whereNumber("id")->name('contact.show');
 //->where('id','[0-9]+'); //for Numeric 
 
 Route::get('companies/{name?}', function ($name=null) {
