@@ -19,18 +19,18 @@ use Illuminate\Support\Facades\Route;
 //__invoke() is used in controller
 Route::get('/', WelcomeController::class)->name('homePage');
 
-Route::controller(ContactController::class)->name('contacts.')->group(function(){
+Route::controller(ContactController::class)->group(function(){
 
 /* Route Examples */
 
-Route::get('/contacts', 'index')->name('index');
+Route::get('/contacts', 'index')->name('contact.index');
 
 
-Route::get('/contacts/create','create')->name('create');
+Route::get('/contacts/create','create')->name('contact.create');
 
 /* Route Parameters */
 
-Route::get('contacts/{id}','show')->whereNumber("id")->name('show');
+Route::get('contacts/{id}','show')->whereNumber("id")->name('contact.show');
 });
     
 //->where('id','[0-9]+'); //for Numeric 

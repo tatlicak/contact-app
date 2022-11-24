@@ -2,18 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\CompanyRepository;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
     //
-    public function index()
+    //protected $company;
+    public function __construct(protected CompanyRepository $company, Request $request)
+
+    {   dd($request->sortBy);
+        //$this->company= $company;
+        //$this->company= new CompanyRepository();
+    }
+    
+
+                            //Eğitim amaçlı yapılmıştır. Injection işlemi constructor ile yapıldığından gerek yoktur. 
+    public function index(CompanyRepository $company)
     {
-        $companies = [
+       /*  $companies = [
             1 => ['name' => 'Company One', 'contacts' => 3],
             2 => ['name' => 'Company Two', 'contacts' => 5],
-        ];
+        ]; */
     
+        $companies=$this->company->pluck();
         $contacts=$this->getContacts();
     
         return view('contacts.index',compact('contacts','companies'));
