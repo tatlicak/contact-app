@@ -1,9 +1,12 @@
 <?php
 
-use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\TagController;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\WelcomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +38,14 @@ Route::get('contacts/{id}','show')->whereNumber("id")->name('contact.show');
     
 //->where('id','[0-9]+'); //for Numeric 
 
-Route::get('companies/{name?}', function ($name=null) {
+Route::resource('/companies', CompanyController::class);
+
+Route::resources(['/tags'=>TagController::class,
+
+                   '/tasks'=>TaskController::class 
+]);
+
+/* Route::get('companies/{name?}', function ($name=null) {
 
     if ($name){
             
@@ -45,7 +55,7 @@ Route::get('companies/{name?}', function ($name=null) {
 
         return "All Companies";
     }
-})->whereAlphaNumeric("name")->name('contact.name');
+})->whereAlphaNumeric("name")->name('contact.name'); */
 //->whereAlpha("name");//for Alpha
 //->where('name','[a-zA-Z]+'); //for Alpha
 

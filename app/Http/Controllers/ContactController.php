@@ -11,7 +11,7 @@ class ContactController extends Controller
     //protected $company;
     public function __construct(protected CompanyRepository $company, Request $request)
 
-    {   dd($request->sortBy);
+    {  
         //$this->company= $company;
         //$this->company= new CompanyRepository();
     }
