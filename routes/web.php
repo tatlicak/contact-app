@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\API\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,8 +59,9 @@ Route::resources(['/tags'=>TagController::class,
 //->whereAlpha("name");//for Alpha
 //->where('name','[a-zA-Z]+'); //for Alpha
 
-
-
+Route::resource('/activities', ActivityController::class)->except(['index','show']);
+//Route::resource('/activities', ActivityController::class)->only(['create','store','edit','update','destroy']);
+Route::apiResource('/contacts', ContactController::class);
 Route::fallback(function(){
 
     return "<h1>Sorry! Page Not Found... Return <a href=".route('homePage').">Home Page</a></h1>";
