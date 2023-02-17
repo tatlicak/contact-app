@@ -17,14 +17,14 @@ class ContactSeeder extends Seeder
   
         public function run()
         {
-            $companies=[];
+            $contacts=[];
             $companyIDs= DB::table('companies')->pluck('id');
     
             $faker=Faker::create();
     
             foreach(range(1,10) as $index){
     
-                    $company=[
+              $contact=[
     
                     'first_name' => $faker->firstName(),
                       'last_name'=>$faker->lastName(),
@@ -35,9 +35,9 @@ class ContactSeeder extends Seeder
                       'created_at'=>now(),
                       'updated_at'=>now()
                     ];
-                    $companies[]=$company;
+                    $contacts[]=$contact;
             }
-            DB::table('companies')->delete();
-            DB::table('companies')->insert($companies);
+            //DB::table('contacts')->delete();
+            DB::table('contacts')->insert($contacts);
         }
 }

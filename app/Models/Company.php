@@ -9,6 +9,7 @@ class Company extends Model
 {
     use HasFactory;
 
+    protected $guarded=[];
     //for referance
 
     /* protected $table="app_companies";
