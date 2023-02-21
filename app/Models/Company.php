@@ -14,4 +14,9 @@ class Company extends Model
 
     /* protected $table="app_companies";
     protected $primaryKey="_id"; */
+
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class);
+    }
 }

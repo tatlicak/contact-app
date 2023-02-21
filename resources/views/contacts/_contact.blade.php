@@ -1,12 +1,12 @@
-<tr @if($loop->odd) class="table-primary" @endif>
+<tr >
                                         
-    <th scope="row">{{$loop->index}}</th>
-    <td>{{ $contact['name'] }}</td>
-    <td>{{ $contact['phone'] }}</td>
-    <td>alfred@test.com</td>
-    <td>Company one</td>
+    <th scope="row">1</th>
+    <td>{{ $contact->first_name }}</td>
+    <td>{{ $contact->last_name }}</td>
+    <td>{{ $contact->email }}</td>
+    <td>{{ $contact->company->name }}</td>
     <td width="150">
-        <a href="{{ route('contact.show', $id) }}"
+        <a href="{{route('contact.show',  $contact->id)}}"
             class="btn btn-sm btn-circle btn-outline-info" title="Show"><i
                 class="fa fa-eye"></i></a>
         <a href="form.html" class="btn btn-sm btn-circle btn-outline-secondary"
