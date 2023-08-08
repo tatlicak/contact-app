@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->Integer("priority")->default(1)->after("status");
+            $table->foreignId('contact_id')->after('id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 
@@ -26,8 +26,8 @@ return new class extends Migration
     public function down()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            
-            $table->dropColumn("priority");
+            $table->dropForeign(['contact_id']);
+            $table->dropColumn('contact_id');
         });
     }
 };
