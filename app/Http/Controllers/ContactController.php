@@ -51,8 +51,9 @@ class ContactController extends Controller
     }
 
     public function create()
-    {
-        return view('contacts.create');
+    { 
+        $companies=$this->company->pluck();
+        return view('contacts.create',compact('companies'));
     }
 
 
@@ -63,4 +64,8 @@ class ContactController extends Controller
     return view('contacts.show')->with('contact',$contact);
     }
 
+    public function store(Request $request)
+    {
+        dd($request);
+    }
 }
