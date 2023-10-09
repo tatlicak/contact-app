@@ -1,5 +1,5 @@
-<form method="get">
-<select class="custom-select" name="company_id" onchange="this.form.submit()">
+
+<select class="custom-select" name="company_id" id="search-select" onchange="this.form.submit()">
     <option value="" selected>All Companies</option>
 
     @foreach ($companies as $id=>$name)
@@ -8,5 +8,3 @@
 
 
   </select>
-
-</form>

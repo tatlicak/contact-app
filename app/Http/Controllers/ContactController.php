@@ -52,20 +52,75 @@ class ContactController extends Controller
 
     public function create()
     { 
-        $companies=$this->company->pluck();
-        return view('contacts.create',compact('companies'));
+        $contact = new Contact();
+        $companies = $this->company->pluck();
+        return view('contacts.create',compact('companies','contact'));
     }
 
 
     public function show($id)
     {
-        $contact=Contact::findOrFail($id);
+        $contact = Contact::findOrFail($id);
 
     return view('contacts.show')->with('contact',$contact);
     }
 
     public function store(Request $request)
     {
-        dd($request);
+        $request->validate([
+
+            'first_name' => 'required|string|max:50',
+            'last_name' => 'required|string|max:50',
+            'email' => 'required|email',
+            'phone' => 'nullable',
+            'address' => 'nullable',
+            'company_id' => 'required|exists:companies,id'
+  
+        ]);
+        
+        Contact::create($request->all());
+
+        return redirect()->route('contacts.index')->with('message','Contact has been added successfully');
+    }
+
+
+    public function edit($id)
+    {
+        $companies=$this->company->pluck();
+        $contact=Contact::findOrFail($id);
+
+    return view('contacts.edit', compact('contact','companies'));
+    }
+
+    public function update(Request $request,$id)
+    {
+        $contact=Contact::findOrFail($id);
+        
+        $request->validate([
+
+            'first_name' => 'required|string|max:50',
+            'last_name' => 'required|string|max:50',
+            'email' => 'required|email',
+            'phone' => 'nullable',
+            'address' => 'nullable',
+            'company_id' => 'required|exists:companies,id'
+  
+        ]);
+        
+        $contact->update($request->all());
+
+        return redirect()->route('contacts.index')->with('message','Contact has been updated successfully');
+    }
+
+    
+    public function destroy($id)
+    {
+        $contact = Contact::findOrFail($id);
+
+        $contact->delete();
+
+        return redirect()->route('contacts.index')->with('message','Contact has been removed successfully');
+    
+
     }
 }
