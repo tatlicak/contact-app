@@ -23,6 +23,8 @@ use App\Http\Controllers\ContactController;
 Route::get('/', WelcomeController::class)->name('homePage');
 
 Route::resource('/contacts',ContactController::class);
+Route::delete('/contacts/{contact}/restore',[ContactController::class, 'restore'])->name('contacts.restore');
+Route::delete('/contacts/{contact}/force-delete',[ContactController::class, 'forceDelete'])->name('contacts.force-delete');
 
 /* Route Parameters */
 /* Route::get('contacts/{id}','show')->whereNumber("id")->name('contact.show');

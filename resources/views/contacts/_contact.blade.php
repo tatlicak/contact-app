@@ -11,12 +11,12 @@
                 class="fa fa-eye"></i></a>
         <a href="{{route('contacts.edit',  $contact->id)}}" class="btn btn-sm btn-circle btn-outline-secondary"
             title="Edit"><i class="fa fa-edit"></i></a>
-        <form action="{{route('contacts.destroy',$contact->id)}}" method="POST" onsubmit="return confirm('Are you sure?')" class="d-inline">
+        <form action="{{route('contacts.destroy',$contact->id)}}" method="POST"  class="d-inline">
             @csrf
             @method('delete')
             <button type="submit" class="btn btn-outline-danger"
             title="Delete"><i
-                class="fa fa-times"></i></button> 
+                class="fa fa-trash"></i></button> 
             </form>
     </td>
 </tr>
