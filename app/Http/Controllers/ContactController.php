@@ -31,8 +31,12 @@ class ContactController extends Controller
     
         $companies=$this->company->pluck();
        // $contacts=Contact::latest()->paginate(10);
+       $query = Contact::query();
+       if (request()->query('trash')) {
+            $query->onlyTrashed();
+       }
 
-        $contacts=Contact::latest()->where(function($query){
+        $contacts=$query->latest()->where(function($query){
 
             if($companyId = request()->query('company_id')){
 
@@ -48,7 +52,12 @@ class ContactController extends Controller
                 $query->orWhere("email","LIKE","%{$search}%");  
 
             }
-        })->paginate(10);
+        })->where(function ($query) {
+            if (request()->query('trash')) {
+                $query->onlyTrashed();
+            }
+        })
+        ->paginate(10);
            
         /* $perPage=10;
         $currentPage=request()->query('page',1);
@@ -129,11 +138,13 @@ class ContactController extends Controller
 
         $contact->delete();
 
-        return redirect()->route('contacts.index')
+        $redirect = request()->query('redirect');
+
+        return ($redirect ? redirect()->route($redirect) : back())
 
             ->with('message','Contact has been moved to trash successfully')
 
-            ->with('undoRoute', route('contacts.restore', $contact->id));
+            ->with('undoRoute', $this->getUndoRoute('contacts.restore', $contact)); 
     
 
     }
@@ -148,9 +159,16 @@ class ContactController extends Controller
 
             ->with('message','Contact has been restored from trash ')
 
-            ->with('undoRoute', route('contacts.destroy', $contact->id));
+            ->with('undoRoute', $this->getUndoRoute('contacts.destroy', $contact));
     
 
+    }
+
+    protected function getUndoRoute($name, $resource)
+    {
+
+        return request()->missing('undo') ? route($name, [$resource->id, 'undo' => true]) : null;
+        
     }
 
     public function forceDelete($id)
