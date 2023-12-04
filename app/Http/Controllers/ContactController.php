@@ -31,20 +31,13 @@ class ContactController extends Controller
     
         $companies=$this->company->pluck();
        // $contacts=Contact::latest()->paginate(10);
-       $query = Contact::query();
-       if (request()->query('trash')) {
-            $query->onlyTrashed();
-       }
 
-        $contacts=$query->allowedSorts('first_name')
+      /*  DB::enableQueryLog(); */
+        $contacts=Contact::allowedTrash()
+                        ->allowedSorts('first_name')
                         ->allowedFilters('company_id')
-                        ->allowedSearch(['first_name','last_name','email'])
-                        ->where(function ($query) {
-                        if (request()->query('trash')) {
-                $query->onlyTrashed();
-            }
-        })
-        ->paginate(10);
+                        ->allowedSearch('first_name','last_name','email')
+                        ->paginate(10);
            
         /* $perPage=10;
         $currentPage=request()->query('page',1);
@@ -53,6 +46,7 @@ class ContactController extends Controller
 
        $contacts= new LengthAwarePaginator($items, $total, $perPage, $currentPage,['path'=> request()->url(),'query'=> request()->query()]);
  */
+        /* dump(DB::getQueryLog()); */
         return view('contacts.index',compact('contacts','companies'));
     }
 
