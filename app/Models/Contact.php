@@ -25,4 +25,19 @@ class Contact extends Model
         return $this->hasMany(Task::class);
     }
 
+    public function scopeSortByNameAlpha(Builder $query) 
+    {
+       return $query->orderBy('first_name'); 
+    }
+
+    public function scopeFilterByCompany(Builder $query)
+    {
+        if($companyId = request()->query('company_id')){
+
+            $query->where('company_id',$companyId);
+
+        }  
+
+        return $query;
+    }
 }
