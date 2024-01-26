@@ -32,9 +32,9 @@ class ContactController extends Controller
         $companies=$this->company->pluck();
        // $contacts=Contact::latest()->paginate(10);
 
-      /*  DB::enableQueryLog(); */
+      /*  DB::enableQueryLog(); */ 
         $contacts=Contact::allowedTrash()
-                        ->allowedSorts(['first_name','last_name','email'])  
+                        ->allowedSorts(['first_name','last_name','email'],"-id")  
                         ->allowedFilters('company_id')
                         ->allowedSearch('first_name','last_name','email')
                         ->paginate(10);
