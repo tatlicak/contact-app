@@ -58,9 +58,8 @@ class ContactController extends Controller
     }
 
 
-    public function show($id)
-    {
-        $contact = Contact::findOrFail($id);
+    public function show(Contact $contact) {
+    
 
     return view('contacts.show')->with('contact',$contact);
     }
@@ -87,14 +86,13 @@ class ContactController extends Controller
     public function edit($id)
     {
         $companies=$this->company->pluck();
-        $contact=Contact::findOrFail($id);
+$contact=Contact::findOrFail($id);
 
     return view('contacts.edit', compact('contact','companies'));
     }
 
-    public function update(Request $request,$id)
+    public function update(Request $request, Contact $contact)
     {
-        $contact=Contact::findOrFail($id);
         
         $request->validate([
 
@@ -113,10 +111,9 @@ class ContactController extends Controller
     }
 
     
-    public function destroy($id)
+    public function destroy(Contact $contact)
     {
-        $contact = Contact::findOrFail($id);
-
+        
         $contact->delete();
 
         $redirect = request()->query('redirect');
@@ -130,10 +127,9 @@ class ContactController extends Controller
 
     }
 
-    public function restore($id)
+    public function restore(Contact $contact)
     {
-        $contact = Contact::onlyTrashed()->findOrFail($id);
-
+    
         $contact->restore();
 
         return back()
@@ -152,10 +148,9 @@ class ContactController extends Controller
         
     }
 
-    public function forceDelete($id)
+    public function forceDelete(Contact $contact)
     {
-        $contact = Contact::onlyTrashed()->findOrFail($id);
-
+        
         $contact->forceDelete();
 
         return back()->with('message','Contact has been removed permanently.');
