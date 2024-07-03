@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\ContactRequest;
 use App\Repositories\CompanyRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -64,19 +65,8 @@ class ContactController extends Controller
     return view('contacts.show')->with('contact',$contact);
     }
 
-    public function store(Request $request)
+    public function store(ContactRequest $request)
     {
-        $request->validate([
-
-            'first_name' => 'required|string|max:50',
-            'last_name' => 'required|string|max:50',
-            'email' => 'required|email',
-            'phone' => 'nullable',
-            'address' => 'nullable',
-            'company_id' => 'required|exists:companies,id'
-  
-        ]);
-        
         Contact::create($request->all());
 
         return redirect()->route('contacts.index')->with('message','Contact has been added successfully');
@@ -91,19 +81,9 @@ $contact=Contact::findOrFail($id);
     return view('contacts.edit', compact('contact','companies'));
     }
 
-    public function update(Request $request, Contact $contact)
+    public function update(ContactRequest $request, Contact $contact)
     {
-        
-        $request->validate([
-
-            'first_name' => 'required|string|max:50',
-            'last_name' => 'required|string|max:50',
-            'email' => 'required|email',
-            'phone' => 'nullable',
-            'address' => 'nullable',
-            'company_id' => 'required|exists:companies,id'
-  
-        ]);
+      
         
         $contact->update($request->all());
 
