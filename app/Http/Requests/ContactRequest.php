@@ -13,6 +13,8 @@ class ContactRequest extends FormRequest
      */
     public function authorize()
     {
+        //dd($this->route('contact')) // Route ile beraber gelen id vs alabilirsin.
+        //dd($this->method()); route gelen isteğin hangi method olduğu PUT, POST etc
         return true;
     }
 
