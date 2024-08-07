@@ -13,9 +13,16 @@
                 <form action="{{ route('register') }}" method="POST">
                     @csrf
                     <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" />
-                        @error('name')
+                        <label for="first_name" class="form-label">First Name</label>
+                        <input type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" />
+                        @error('first_name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="last_name" class="form-label">Last Name</label>
+                        <input type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" />
+                        @error('last_name')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
