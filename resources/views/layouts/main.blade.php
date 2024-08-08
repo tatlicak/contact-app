@@ -27,21 +27,36 @@
         <!-- /.navbar-header -->
         <div class="collapse navbar-collapse" id="navbar-toggler">
           <ul class="navbar-nav">
+
+            @if (Auth::check())
             <li class="nav-item"><a href="#" class="nav-link">Companies</a></li>
             <li class="nav-item active"><a href="#" class="nav-link">Contacts</a></li>
+            @endif
+
           </ul>
           <ul class="navbar-nav ml-auto">
+
+            @if(!Auth::check())
+
             <li class="nav-item mr-2"><a href="{{route('login')}}" class="btn btn-outline-secondary">Login</a></li>
             <li class="nav-item"><a href="{{route('register')}}" class="btn btn-outline-primary">Register</a></li>
+            
+           @else
+
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                John Doe
+                {{ Auth::user()->first_name }}  {{Auth::user()->last_name}}
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="profile.html">Settings</a>
-                <a class="dropdown-item" href="#">Logout</a>
+               <form action="{{ route('logout')}}" method="POST" style="display: inline;">
+                @csrf
+                <button class="dropdown-item">Logout</button>
+               </form>
               </div>
             </li>
+
+            @endif
           </ul>
         </div>
       </div>
