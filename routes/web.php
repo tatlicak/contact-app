@@ -23,7 +23,7 @@ use App\Http\Controllers\DashboardController;
 //__invoke() is used in controller
 Route::get('/', WelcomeController::class)->name('homePage');
 
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth','verified'])->group(function(){
         Route::get('/dashboard', DashboardController::class);
 
         Route::resource('/contacts',ContactController::class);
