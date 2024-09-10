@@ -8,6 +8,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Settings\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,8 @@ Route::get('/', WelcomeController::class)->name('homePage');
 
 Route::middleware(['auth','verified'])->group(function(){
         Route::get('/dashboard', DashboardController::class);
+        Route::get('/settings/profile', ProfileController::class)->name('user-profile-information.edit');
+        
 
         Route::resource('/contacts',ContactController::class);
         Route::delete('/contacts/{contact}/restore',[ContactController::class, 'restore'])
